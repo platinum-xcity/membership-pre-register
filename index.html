@@ -429,9 +429,95 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     letter-spacing: 0.05em;
     border-top: 1px solid #1a1a24;
   }
+
+  /* ── LAUNCH ANNOUNCEMENT MODAL ── */
+  .launch-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    animation: modal-fade-in 0.35s ease;
+  }
+  @keyframes modal-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .launch-modal {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    max-width: 420px;
+    width: 100%;
+    padding: clamp(1.8rem, 5vw, 2.6rem) clamp(1.5rem, 5vw, 2.2rem);
+    text-align: center;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.6);
+  }
+  .launch-modal-close {
+    position: absolute;
+    top: 0.8rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.2rem;
+  }
+  .launch-modal-close:hover { color: var(--gold-light); }
+  .launch-modal h2 {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.03em;
+  }
+  .launch-modal p {
+    font-size: 0.86rem;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 1.6rem;
+  }
+  .launch-modal-cta {
+    display: inline-block;
+    padding: 0.85em 2.4em;
+    background: var(--gold);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .launch-modal-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
 </style>
 </head>
 <body>
+<div class="launch-modal-overlay" id="launchModalOverlay">
+  <div class="launch-modal">
+    <button class="launch-modal-close" id="launchModalClose" aria-label="關閉">×</button>
+    <h2>會員制度正式開跑！</h2>
+    <p>活動已正式開跑，立即前往查看完整賽季內容與豪華獎品</p>
+    <a class="launch-modal-cta" href="https://platinum-xcity.github.io/xcity-game/" target="_blank">點擊進入活動頁面</a>
+  </div>
+</div>
+<script>
+(function() {
+  var overlay = document.getElementById('launchModalOverlay');
+  var closeBtn = document.getElementById('launchModalClose');
+  function closeModal() { overlay.style.display = 'none'; }
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeModal();
+  });
+})();
+</script>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WDSKPF"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
